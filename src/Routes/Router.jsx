@@ -7,6 +7,7 @@ import RegisterPage from "../Pages/Authentication/RegisterPage";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import AddTask from "../Pages/Dashboard/AddTask";
 import UpdateTask from "../Pages/Dashboard/UpdateTask";
+import ToDoList from "../Pages/Dashboard/ToDoList";
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +39,7 @@ export const router = createBrowserRouter([
     children: [
       { path: "addTask", element: <AddTask></AddTask> },
       { path: "updateTask", element: <UpdateTask></UpdateTask> },
+      { path: "toDoList", element: <ToDoList></ToDoList> },
     ],
   },
 ]);

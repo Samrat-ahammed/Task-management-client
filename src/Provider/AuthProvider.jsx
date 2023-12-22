@@ -7,8 +7,9 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
-import app from "../Firebase/Firebase.confiq";
+import app from "../Firebase/firebase.confiq";
 // import axios from "axios";
 
 export const AuthContext = createContext();
@@ -32,6 +33,13 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return signInWithPopup(auth, proivider);
   };
+  const updateUserProfile = (name, photo) => {
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: photo,
+    });
+  };
+
   const logOut = () => {
     setLoading(true);
     return signOut(auth);
@@ -40,19 +48,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      // console.log("current user", currentUser);
       setLoading(false);
-
-      // if (currentUser) {
-      //   const loggedUser = { email: currentUser.email };
-      //   axios
-      //     .post("https://study-assignment-server.vercel.app/jwt", loggedUser, {
-      //       withCredentials: true,
-      //     })
-      //     .then((res) => {
-      //       console.log("token response", res.data);
-      //     });
-      // }
     });
     return () => {
       return unsubscribe();
@@ -65,6 +61,7 @@ const AuthProvider = ({ children }) => {
     createUser,
     signIn,
     signInWithGoogle,
+    updateUserProfile,
     logOut,
   };
 

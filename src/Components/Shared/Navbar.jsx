@@ -1,7 +1,24 @@
 import { Link } from "react-router-dom";
 import navBarLogo from "../../assets/favo.ico.png";
+import { useContext } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+  const handleLogout = () => {
+    logOut()
+      .then((res) => {
+        Swal.fire({
+          icon: "error",
+          title: "Logout Successfully",
+          text: "",
+          footer: "",
+        });
+        console.log(res.user);
+      })
+      .catch((err) => console.log(err));
+  };
   const navLinks = (
     <>
       <Link to={"/"}>
@@ -64,27 +81,35 @@ const Navbar = () => {
               <div className="w-10 rounded-full">
                 <img
                   alt="Tailwind CSS Navbar component"
-                  src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                  src={
+                    user?.photoURL
+                      ? user?.photoURL
+                      : "https://i.ibb.co/KDXmPL9/avater.png"
+                  }
                 />
               </div>
             </div>
-            <ul
-              tabIndex={0}
-              className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
-            >
-              <li>
-                <a className="justify-between">samrrat ahammed</a>
-              </li>
-              <li>
-                <a>samoiuv@gmail.com</a>
-              </li>
-              <Link to={"/dashboard"}>
-                <a>Dashboard</a>
-              </Link>
-              <li>
-                <a>Logout</a>
-              </li>
-            </ul>
+            {user ? (
+              <ul
+                tabIndex={0}
+                className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+              >
+                <li>
+                  <a className="justify-between">{user?.displayName}</a>
+                </li>
+                <li>
+                  <a>{user?.email}</a>
+                </li>
+                <li>
+                  <Link to={"/dashboard/addTask"}>Dashboard</Link>
+                </li>
+                <li onClick={handleLogout}>
+                  <a>Logout</a>
+                </li>
+              </ul>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>

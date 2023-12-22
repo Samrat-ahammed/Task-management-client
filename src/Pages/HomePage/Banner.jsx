@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const Banner = () => {
+  const { user } = useContext(AuthContext);
   return (
     <div className="mt-14">
       <div
@@ -17,9 +20,11 @@ const Banner = () => {
               comprehensive task management solution. Stay organized and on top
               of your to-do list with our user-friendly task management website.
             </p>
-            <Link to={"/login"} className="btn btn-accent">
-              Let’s Explore
-            </Link>
+            {!user && (
+              <Link to={"/login"} className="btn btn-accent">
+                Let’s Explore
+              </Link>
+            )}
           </div>
         </div>
       </div>
