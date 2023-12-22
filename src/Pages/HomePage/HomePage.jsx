@@ -3,8 +3,17 @@ import SectionTitle from "../../Components/SectionTitle";
 import useAxiosPublic from "../../CustomHooks/useAxios";
 import Banner from "./Banner";
 import HomeCard from "./HomeCard";
+import "aos/dist/aos.css";
+import Aos from "aos";
 
 const HomePage = () => {
+  Aos.init({
+    duration: 1000,
+    easing: "ease-in-out",
+    once: true,
+    mirror: false,
+  });
+
   const axiosPublic = useAxiosPublic();
   const [task, setTask] = useState();
   useEffect(() => {

@@ -8,6 +8,7 @@ import Dashboard from "../Pages/Dashboard/Dashboard";
 import AddTask from "../Pages/Dashboard/AddTask";
 import UpdateTask from "../Pages/Dashboard/UpdateTask";
 import ToDoList from "../Pages/Dashboard/ToDoList";
+import About from "../Pages/HomePage/About";
 
 export const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ export const router = createBrowserRouter([
       {
         path: "/allTask",
         element: <AllTask />,
+      },
+      {
+        path: "/about",
+        element: <About></About>,
       },
     ],
   },

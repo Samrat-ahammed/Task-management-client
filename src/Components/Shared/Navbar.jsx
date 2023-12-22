@@ -31,6 +31,11 @@ const Navbar = () => {
           <a>Task</a>
         </li>
       </Link>
+      <Link to={"/about"}>
+        <li>
+          <a>About</a>
+        </li>
+      </Link>
     </>
   );
   return (
